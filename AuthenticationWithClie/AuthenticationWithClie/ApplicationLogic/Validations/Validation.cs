@@ -13,5 +13,18 @@ namespace AuthenticationWithClie.ApplicationLogic.Validations
             return text.Length >= start && text.Length < end;
         }
 
+        public static bool Contains(string text, char targetCharacter)
+        {
+            foreach (char character in text)
+            {
+                if (character == targetCharacter)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
     }
 }

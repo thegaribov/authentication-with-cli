@@ -40,5 +40,44 @@ namespace AuthenticationWithClie.Database.Repository
 
             return false;
         }
+
+        public static User GetUserByEmailAndPassword(string email, string password)
+        {
+            foreach (User user in Users)
+            {
+                if (user.Email == email && user.Password == password)
+                {
+                    return user;
+                }
+            }
+
+            return null;
+        }
+
+        public static bool IsUserExistByEmailAndPassword(string email, string password)
+        {
+            foreach (User user in Users)
+            {
+                if (user.Email == email && user.Password == password)
+                {
+                    return true;
+                }
+            }
+
+            return false; ;
+        }
+
+        public static User GetUserByEmail(string email)
+        {
+            foreach (User user in Users)
+            {
+                if (user.Email == email)
+                {
+                    return user;
+                }
+            }
+
+            return null;
+        }
     }
 }

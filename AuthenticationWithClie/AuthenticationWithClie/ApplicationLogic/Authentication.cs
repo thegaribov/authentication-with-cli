@@ -13,8 +13,7 @@ namespace AuthenticationWithClie.ApplicationLogic
     {
         public static void Register()
         {
-            Console.Write("Please enter user's name : ");
-            string firstName = Console.ReadLine();
+            string firstName = GetFirstName();
 
             Console.Write("Please enter user's last name : ");
             string lastName = Console.ReadLine();
@@ -28,11 +27,13 @@ namespace AuthenticationWithClie.ApplicationLogic
             Console.Write("Please enter user's confirm password : ");
             string confirmPassword = Console.ReadLine();
 
+            Console.WriteLine();
+
             if (
-                UserValidation.IsValidFirstName(firstName) &
                 UserValidation.IsValidLastName(lastName) &
                 UserValidation.IsValidEmail(email) &
-                UserValidation.IsValidPassword(password, confirmPassword)  //&& -> shirt cut circuit
+                UserValidation.IsValidPassword(password, confirmPassword) &  //&& -> shirt cut circuit
+                !UserValidation.IsUserExist(email)
                )
             {
                 User user = UserRepository.AddUser(firstName, lastName, email, password);
@@ -41,10 +42,35 @@ namespace AuthenticationWithClie.ApplicationLogic
         }
 
 
+        private static string GetFirstName()
+        {
+            Console.Write("Please enter user's name : ");
+            string firstName = Console.ReadLine();
+
+            while (!UserValidation.IsValidFirstName(firstName))
+            {
+                Console.Write("Please enter correct user's name : ");
+                firstName = Console.ReadLine();
+            }
+
+            return firstName;
+        }
+
         public static void Login()
         {
+            Console.Write("Please enter user's email : ");
+            string email = Console.ReadLine();
 
+            Console.Write("Please enter user's password : ");
+            string password = Console.ReadLine();
+
+            if (UserRepository.IsUserExistByEmailAndPassword(email, password))
+            {
+                User user = UserRepository.GetUserByEmail(email);
+                Console.WriteLine("User successfully authenticated : ", user.GetUserInfo());
+            }
         }
+
 
     }
 }
