@@ -27,5 +27,18 @@ namespace AuthenticationWithClie.Database.Repository
         {
             return Users.Count;
         }
+
+        public static bool IsUserExistsByEmail(string email)
+        {
+            foreach (User user in Users)
+            {
+                if (user.Email == email)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
     }
 }
