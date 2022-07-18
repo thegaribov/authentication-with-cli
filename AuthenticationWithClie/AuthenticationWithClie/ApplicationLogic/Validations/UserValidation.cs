@@ -54,7 +54,6 @@ namespace AuthenticationWithClie.ApplicationLogic.Validations
 
         public static bool IsPasswordsMatch(string password, string confirmPassword)
         {
-
             if (password == confirmPassword)
             {
                 return true;
@@ -63,17 +62,19 @@ namespace AuthenticationWithClie.ApplicationLogic.Validations
             Console.WriteLine("Password is not match");
 
             return false;
+
         }
 
         public static bool IsValidPassword(string password)
         {
+            Regex regex = new Regex(@"^(?=.*[0-9])(?=.*[A-Z])(?=[a-zA-Z0-9]{8,}).*[a-z]$");
 
-            if (password == confirmPassword)
+            if (regex.IsMatch(password))
             {
                 return true;
             }
 
-            Console.WriteLine("Password is not match");
+            Console.WriteLine("Daxil etdiyiniz sifre telebleri odemir");
 
             return false;
         }
