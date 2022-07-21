@@ -37,7 +37,7 @@ namespace AuthenticationWithClie.ApplicationLogic
                )
             {
                 User user = UserRepository.AddUser(firstName, lastName, email, password);
-                Console.WriteLine($"User added to system, his/her details are : {user.GetUserInfo()}");
+                Console.WriteLine($"User added to system, his/her details are : {user.GetInfo()}");
             }
         }
 
@@ -67,7 +67,7 @@ namespace AuthenticationWithClie.ApplicationLogic
             if (UserRepository.IsUserExistByEmailAndPassword(email, password))
             {
                 User user = UserRepository.GetUserByEmail(email);
-                Console.WriteLine("User successfully authenticated : ", user.GetUserInfo());
+                Console.WriteLine($"User successfully authenticated : {user.GetInfo()}");
             }
         }
 

@@ -8,6 +8,7 @@ namespace AuthenticationWithClie.Database.Models
 {
     public class User
     {
+        public int MyProperty { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
@@ -21,9 +22,9 @@ namespace AuthenticationWithClie.Database.Models
             Password = password;
         }
 
-        public string GetUserInfo()
+        public virtual string GetInfo()
         {
-            return $"Name : {FirstName} Last name :  {LastName}, Email : {Email}";
+            return $"Hello user, {FirstName} {LastName}";
         }
     }
 }

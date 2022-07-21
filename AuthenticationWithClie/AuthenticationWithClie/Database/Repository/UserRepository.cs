@@ -9,11 +9,27 @@ namespace AuthenticationWithClie.Database.Repository
 {
     class UserRepository
     {
-        private static List<User> Users { get; set; } = new List<User>();
+        private static List<User> Users { get; set; } = new List<User>()
+        {
+            new Admin("Mahmood", "Garibov", "qaribovmahmud@gmail.com", "123321"),
+            new User("Mahmood", "Garibov", "qarib@gmail.com", "123321"),
+        };
 
         public static User AddUser(string firstName, string lastName, string email, string password)
         {
             User user = new User(firstName, lastName, email, password);
+            Users.Add(user);
+            return user;
+        }
+
+        public static User AddUser(User user)
+        {
+            Users.Add(user);
+            return user;
+        }
+
+        public static User AddUser(Admin user)
+        {
             Users.Add(user);
             return user;
         }
@@ -78,6 +94,11 @@ namespace AuthenticationWithClie.Database.Repository
             }
 
             return null;
+        }
+
+        public static void Delete(User user)
+        {
+            Users.Remove(user);
         }
     }
 }
