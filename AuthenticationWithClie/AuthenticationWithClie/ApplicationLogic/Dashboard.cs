@@ -27,7 +27,7 @@ namespace AuthenticationWithClie.ApplicationLogic
                 else
                 {
                     UserRepository.Delete(user);
-                    Admin admin = new Admin(user.FirstName, user.LastName, user.Email, user.Password);
+                    Admin admin = new Admin(user.FirstName, user.LastName, user.Email, user.Password, user.Id);
                     UserRepository.AddUser(admin);
                 }
             }

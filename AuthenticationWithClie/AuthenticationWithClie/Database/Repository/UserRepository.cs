@@ -9,15 +9,34 @@ namespace AuthenticationWithClie.Database.Repository
 {
     class UserRepository
     {
+        private static int _idCounter;
+
+        public static int IdCounter
+        {
+            get 
+            {
+                _idCounter++;
+                return _idCounter; 
+            }
+        }
+
+
         private static List<User> Users { get; set; } = new List<User>()
         {
             new Admin("Mahmood", "Garibov", "qaribovmahmud@gmail.com", "123321"),
-            new User("Mahmood", "Garibov", "qarib@gmail.com", "123321"),
+            new User("Eshqin", "Mahmudov", "eshqin@gmail.com", "123321"),
         };
 
         public static User AddUser(string firstName, string lastName, string email, string password)
         {
-            User user = new User(firstName, lastName, email, password);
+            User user = new User(firstName, lastName, email, password, IdCounter);
+            Users.Add(user);
+            return user;
+        }
+
+        public static User AddUser(string firstName, string lastName, string email, string password, int id)
+        {
+            User user = new User(firstName, lastName, email, password, id);
             Users.Add(user);
             return user;
         }

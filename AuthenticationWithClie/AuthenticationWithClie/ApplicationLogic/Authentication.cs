@@ -32,7 +32,7 @@ namespace AuthenticationWithClie.ApplicationLogic
             if (
                 UserValidation.IsValidLastName(lastName) &
                 UserValidation.IsValidEmail(email) &
-                UserValidation.IsValidPassword(password, confirmPassword) &  //&& -> shirt cut circuit
+                //UserValidation.IsValidPassword(password, confirmPassword) &  //&& -> shirt cut circuit
                 !UserValidation.IsUserExist(email)
                )
             {
