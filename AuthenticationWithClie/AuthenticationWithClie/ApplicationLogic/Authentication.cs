@@ -127,10 +127,22 @@ namespace AuthenticationWithClie.ApplicationLogic
             Console.Write("Please enter user's password : ");
             string password = Console.ReadLine();
 
-            if (UserRepository.IsUserExistByEmailAndPassword(email, password))
+            User user = UserRepository.GetUserByEmail(email);
+
+            if (user != null)
             {
-                User user = UserRepository.GetUserByEmail(email);
-                Console.WriteLine($"User successfully authenticated : {user.GetInfo()}");
+                if (user is Admin)
+                {
+                    Dashboard.AdminPanel();
+                }
+                else
+                {
+                    Dashboard.UserPanel();
+                }
+            }
+            else
+            {
+                Console.WriteLine("User is not found, password or email is inccorrect");
             }
         }
     }
