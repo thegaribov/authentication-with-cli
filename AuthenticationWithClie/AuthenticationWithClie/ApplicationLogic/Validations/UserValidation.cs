@@ -40,7 +40,7 @@ namespace AuthenticationWithClie.ApplicationLogic.Validations
 
         public static bool IsValidEmail(string email)
         {
-            Regex regex = new Regex(@"^[A-Za-z0-9]{10,30}@code\.edu\.az$");
+            Regex regex = new Regex(@"^[A-Za-z0-9]{3,20}@code\.edu\.az$");
 
             if (regex.IsMatch(email))
             {

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AuthenticationWithClie.UI;
 
 namespace AuthenticationWithClie.ApplicationLogic
 {
@@ -14,46 +15,108 @@ namespace AuthenticationWithClie.ApplicationLogic
         public static void Register()
         {
             string firstName = GetFirstName();
+            string lastName = GetLastName();
+            string email = GetEmail();
+            string password = GetPassword();
 
-            Console.Write("Please enter user's last name : ");
-            string lastName = Console.ReadLine();
-
-            Console.Write("Please enter user's email : ");
-            string email = Console.ReadLine();
-
-            Console.Write("Please enter user's password : ");
-            string password = Console.ReadLine();
-
-            Console.Write("Please enter user's confirm password : ");
-            string confirmPassword = Console.ReadLine();
-
-            Console.WriteLine();
-
-            if (
-                UserValidation.IsValidLastName(lastName) &
-                UserValidation.IsValidEmail(email) &
-                //UserValidation.IsValidPassword(password, confirmPassword) &  //&& -> shirt cut circuit
-                !UserValidation.IsUserExist(email)
-               )
-            {
-                User user = UserRepository.AddUser(firstName, lastName, email, password);
-                Console.WriteLine($"User added to system, his/her details are : {user.GetInfo()}");
-            }
+            User user = UserRepository.AddUser(firstName, lastName, email, password);
+            Console.WriteLine($"User successfully registered, his/her details are : {user.GetInfo()}");
+            Program.Main(new string[] { });
         }
 
 
         private static string GetFirstName()
         {
-            Console.Write("Please enter user's name : ");
-            string firstName = Console.ReadLine();
+            string firstName = string.Empty;
+            bool isExceptionExists = false;
 
-            while (!UserValidation.IsValidFirstName(firstName))
+            do
             {
-                Console.Write("Please enter correct user's name : ");
-                firstName = Console.ReadLine();
-            }
+                try
+                {
+                    Console.Write("Please enter user's name : ");
+                    firstName = Console.ReadLine();
+                    isExceptionExists = false;
+                }
+                catch
+                {
+                    Console.Write("Something went wrong...");
+                    isExceptionExists = true;
+                }
+            } while (!isExceptionExists && !UserValidation.IsValidFirstName(firstName));
 
             return firstName;
+        }
+        private static string GetLastName()
+        {
+            string lastName = string.Empty;
+            bool isExceptionExists = false;
+
+            do
+            {
+                try
+                {
+                    Console.Write("Please enter user's last name : ");
+                    lastName = Console.ReadLine();
+                    isExceptionExists = false;
+                }
+                catch
+                {
+                    Console.Write("Something went wrong...");
+                    isExceptionExists = true;
+                }
+            } while (!isExceptionExists && !UserValidation.IsValidLastName(lastName));
+
+            return lastName;
+        }
+        private static string GetEmail()
+        {
+            string email = string.Empty;
+            bool isExceptionExists = false;
+
+            do
+            {
+                try
+                {
+                    Console.Write("Please enter user's email : ");
+                    email = Console.ReadLine();
+                    isExceptionExists = false;
+                }
+                catch
+                {
+                    Console.Write("Something went wrong...");
+                    isExceptionExists = true;
+                }
+            } while (!isExceptionExists && !UserValidation.IsValidEmail(email) && !UserValidation.IsUserExist(email));
+
+            return email;
+        }
+        private static string GetPassword()
+        {
+            string password = string.Empty;
+            string confirmPassword = string.Empty;
+            bool isExceptionExists = false;
+
+            do
+            {
+                try
+                {
+                    Console.Write("Please enter user's password : ");
+                    password = Console.ReadLine();
+
+                    Console.Write("Please enter confirm password : ");
+                    confirmPassword = Console.ReadLine();
+
+                    isExceptionExists = false;
+                }
+                catch
+                {
+                    Console.Write("Something went wrong...");
+                    isExceptionExists = true;
+                }
+            } while (!isExceptionExists && !UserValidation.IsValidPassword(password) && !UserValidation.IsPasswordsMatch(password, confirmPassword));
+
+            return password;
         }
 
         public static void Login()
@@ -70,7 +133,5 @@ namespace AuthenticationWithClie.ApplicationLogic
                 Console.WriteLine($"User successfully authenticated : {user.GetInfo()}");
             }
         }
-
-
     }
 }
