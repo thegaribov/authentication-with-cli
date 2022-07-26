@@ -25,6 +25,7 @@ namespace AuthenticationWithClie.Database.Repository
         {
             new Admin("Mahmood", "Garibov", "qaribovmahmud@gmail.com", "123321"),
             new User("Eshqin", "Mahmudov", "eshqin@gmail.com", "123321"),
+            new User("Yehya", "Mahmudov", "yehya@gmail.com", "123321"),
         };
 
         public static User AddUser(string firstName, string lastName, string email, string password)

@@ -10,9 +10,10 @@ namespace AuthenticationWithClie.ApplicationLogic
 {
     public static partial class Dashboard
     {
+        public static User CurrentUser { get; set; }
+
         public static void AdminPanel()
         {
-            Console.WriteLine("/make-admin");
             string command = Console.ReadLine();
 
             if (command == "/make-admin")
@@ -35,6 +36,19 @@ namespace AuthenticationWithClie.ApplicationLogic
             {
 
             }
+
+            if (command == "/show-reports")
+            {
+                List<Report> reports = ReportRepository.GetAll();
+                int reportCounter = 1;
+
+                foreach (Report report in reports)
+                {
+                    Console.WriteLine($"{reportCounter}." + report.GetInfo());
+                    reportCounter++;
+                }
+
+            }
         }
     }
 
@@ -42,7 +56,35 @@ namespace AuthenticationWithClie.ApplicationLogic
     {
         public static void UserPanel()
         {
+            while (true)
+            {
+                string command = Console.ReadLine();
 
+                if (command == "/report")
+                {
+                    string email = Console.ReadLine();
+                    string content = Console.ReadLine();
+
+                    User to = UserRepository.GetUserByEmail(email); //DRY
+
+                    if (to == null)
+                    {
+                        Console.WriteLine("Email ile isitfadeci tapilmadi");
+                    }
+                    if (to == CurrentUser)
+                    {
+                        Console.WriteLine("oZUVUZU REPORT Ede bilmezsiniz");
+                    }
+                    else
+                    {
+                        ReportRepository.Add(CurrentUser, to, content);
+                    }
+                }
+                else
+                {
+                    return;
+                }
+            }
         }
     }
 }

@@ -64,10 +64,24 @@ namespace AuthenticationWithClie.ApplicationLogic
             Console.Write("Please enter user's password : ");
             string password = Console.ReadLine();
 
-            if (UserRepository.IsUserExistByEmailAndPassword(email, password))
+            User user = UserRepository.GetUserByEmail(email);
+
+            if (user != null)
             {
-                User user = UserRepository.GetUserByEmail(email);
-                Console.WriteLine($"User successfully authenticated : {user.GetInfo()}");
+                Dashboard.CurrentUser = user;
+
+                if (user is Admin)
+                {
+                    Dashboard.AdminPanel();
+                }
+                else
+                {
+                    Dashboard.UserPanel();
+                }
+            }
+            else
+            {
+                Console.WriteLine("User tapilmaldi");
             }
         }
 
