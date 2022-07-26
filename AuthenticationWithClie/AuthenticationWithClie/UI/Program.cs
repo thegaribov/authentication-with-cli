@@ -8,12 +8,9 @@ namespace AuthenticationWithClie.UI
 {
     internal class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
-
-
-
-
+            Console.WriteLine();
             Console.WriteLine("Commands :");
             Console.WriteLine("/register");
             Console.WriteLine("/login");
