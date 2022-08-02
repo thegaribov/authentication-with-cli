@@ -19,8 +19,8 @@ namespace AuthenticationWithClie.ApplicationLogic
             string email = GetEmail();
             string password = GetPassword();
 
-            User user = UserRepository.AddUser(firstName, lastName, email, password);
-            Console.WriteLine($"User successfully registered, his/her details are : {user.GetInfo()}");
+            //User user = UserRepository.AddUser(firstName, lastName, email, password);
+            //Console.WriteLine($"User successfully registered, his/her details are : {user.GetInfo()}");
             Program.Main(new string[] { });
         }
 

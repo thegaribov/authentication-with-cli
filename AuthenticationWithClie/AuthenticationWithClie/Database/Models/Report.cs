@@ -1,4 +1,5 @@
-﻿using AuthenticationWithClie.Database.Repository;
+﻿using AuthenticationWithClie.Database.Models.Common;
+using AuthenticationWithClie.Database.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,9 +8,8 @@ using System.Threading.Tasks;
 
 namespace AuthenticationWithClie.Database.Models
 {
-    public sealed class Report
+    public sealed class Report : Entity<Guid>
     {
-        public int Id { get; set; }
         public string Content { get; set; }
         public User From { get; set; }
         public User To { get; set; }
@@ -17,7 +17,7 @@ namespace AuthenticationWithClie.Database.Models
 
         public Report(User from, User to, string content)
         {
-            Id = ReportRepository.IdCounter;
+            Id = Guid.NewGuid();
             Content = content;
             From = from;
             To = to;

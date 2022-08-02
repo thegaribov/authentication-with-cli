@@ -21,16 +21,16 @@ namespace AuthenticationWithClie.ApplicationLogic
                 string email = Console.ReadLine();
                 User user = UserRepository.GetUserByEmail(email);
 
-                if (user == null)
-                {
-                    Console.WriteLine("Email ile isitfadeci tapilmadi");
-                }
-                else
-                {
-                    UserRepository.Delete(user);
-                    Admin admin = new Admin(user.FirstName, user.LastName, user.Email, user.Password, user.Id);
-                    UserRepository.AddUser(admin);
-                }
+                //if (user == null)
+                //{
+                //    Console.WriteLine("Email ile isitfadeci tapilmadi");
+                //}
+                //else
+                //{
+                //    UserRepository.Delete(user);
+                //    Admin admin = new Admin(user.FirstName, user.LastName, user.Email, user.Password, user.Id);
+                //    UserRepository.AddUser(admin);
+                //}
             }
             else
             {
@@ -39,7 +39,8 @@ namespace AuthenticationWithClie.ApplicationLogic
 
             if (command == "/show-reports")
             {
-                List<Report> reports = ReportRepository.GetAll();
+                ReportRepository reportRepository = new ReportRepository();
+                List<Report> reports = reportRepository.GetAll();
                 int reportCounter = 1;
 
                 foreach (Report report in reports)
@@ -79,6 +80,17 @@ namespace AuthenticationWithClie.ApplicationLogic
                     {
                         ReportRepository.Add(CurrentUser, to, content);
                     }
+                }
+                else if (command == "/update-info")
+                {
+                    string newFirstName = Console.ReadLine();
+                    CurrentUser.FirstName = newFirstName;
+
+                    UserRepository.Update(CurrentUser.Id, newFirstName);
+                }
+                else if(command == "/show-update-info")
+                {
+                    Console.WriteLine(CurrentUser.GetModifyInfo());
                 }
                 else
                 {
