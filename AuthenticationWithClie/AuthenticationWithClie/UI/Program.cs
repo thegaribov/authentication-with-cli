@@ -13,12 +13,17 @@ namespace AuthenticationWithClie.UI
         public static void Main(string[] args)
         {
             UserRepository userRepository = new UserRepository();
+
             userRepository.Add(new User("Mahmood", "Garibov", "123", "!23", 1));
 
             User user = userRepository.GetById(1);
             List<User> users = userRepository.GetAll();
             userRepository.Delete(user);
 
+            UserRepository userRepository2 = new UserRepository();
+
+
+            UserRepository userRepository = new UserRepository();
 
             //Console.WriteLine();
             //Console.WriteLine("Commands :");

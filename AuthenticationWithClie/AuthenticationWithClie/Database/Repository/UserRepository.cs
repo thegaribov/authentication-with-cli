@@ -22,12 +22,17 @@ namespace AuthenticationWithClie.Database.Repository
             }
         }
 
-        //private static List<User> Users { get; set; } = new List<User>()
-        //{
-        //    new Admin("Mahmood", "Garibov", "qaribovmahmud@gmail.com", "123321"),
-        //    new User("Eshqin", "Mahmudov", "eshqin@gmail.com", "123321"),
-        //    new User("Yehya", "Mahmudov", "yehya@gmail.com", "123321"),
-        //};
+        static UserRepository()
+        {
+            SeedUsers();
+        }
+
+        private static void SeedUsers()
+        {
+            DbContext.Add(new Admin("Mahmood", "Garibov", "qaribovmahmud@gmail.com", "123321"));
+            DbContext.Add(new User("Eshqin", "Mahmudov", "eshqin@gmail.com", "123321"));
+            DbContext.Add(new User("Yehya", "Mahmudov", "yehya@gmail.com", "123321"));
+        }
 
         public User AddUser(string firstName, string lastName, string email, string password)
         {
